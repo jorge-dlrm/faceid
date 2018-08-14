@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.vasco.faceid" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>FaceID</name>
+    <js-module name="FaceID" src="www/FaceID.js">
+        <clobbers target="FaceID" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="FaceID">
+                <param name="android-package" value="com.vasco.faceid.FaceID" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity 
+                android:label="Face Recognition Activity" 
+                android:name="com.vasco.faceid.FaceRecognitionActivity">
+                <intent-filter>
+                    <!-- We are going to use this name to start the activity later in Java -->
+                    <action android:name="com.vasco.faceid.FaceRecognitionActivity" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+            </activity>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <source-file src="src/android/FaceID.java" target-dir="src/com/vasco/FaceID" />
+        <source-file src="src/android/FaceRecognitionActivity.java" target-dir="src/com/vasco/FaceID" />
+        <source-file src="src/android/constants/Constants.java" target-dir="src/com/vasco/FaceID/constants" />
+        <source-file src="src/android/recognizer/FaceRecognizer.java" target-dir="src/com/vasco/FaceID/recognizer" />
+        <source-file src="src/android/recognizer/FaceRecognizerOverlay.java" target-dir="src/com/vasco/FaceID/recognizer" />
+        <source-file src="src/android/recognizer/FaceRecognizerView.java" target-dir="src/com/vasco/FaceID/recognizer" />
+        <source-file src="src/android/http/DefaultConfig.java" target-dir="src/com/vasco/FaceID/http" />
+        <source-file src="src/android/http/EnrollmentResult.java" target-dir="src/com/vasco/FaceID/http" />
+        <source-file src="src/android/http/HttpConnectionManager.java" target-dir="src/com/vasco/FaceID/http" />
+        <source-file src="src/android/http/RecognitionResult.java" target-dir="src/com/vasco/FaceID/http" />
+        <source-file src="src/android/http/ServerResult.java" target-dir="src/com/vasco/FaceID/http" />
+        <source-file src="src/android/resources/layout/activity_main.xml" target-dir="res/layout"/>
+        <source-file src="src/android/resources/values/stringV.xml" target-dir="res/values"/>
+        <source-file src="src/android/resources/values/styles.xml" target-dir="res/values"/>
+        <source-file src="src/android/resources/values/colors.xml" target-dir="res/values"/>
+        <source-file src="src/android/resources/drawable/face_not_detected.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/face_not_detected_unknown.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/face_ok.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/face_too_close.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/face_too_far.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/ic_launcher.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/lighting_not_uniform.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/lighting_ok.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/lighting_too_bright.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/lighting_too_dark.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_ko.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_not_centered_bottom.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_not_centered_left.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_not_centered_right.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_not_centered_top.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_ok.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_too_high.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_too_low.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_yaw_too_left.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/position_yaw_too_right.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/shaky_ok.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/splash.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/switch_thumb.xml" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/too_shaky.png" target-dir="app/src/main/res/drawable"/>
+        <source-file src="src/android/resources/drawable/vasco.png" target-dir="app/src/main/res/drawable"/>
+        <lib-file src="libs/OasisCSFaceClient.aar"/>
+        <framework src="src/android/oasis.gradle" custom="true" type="gradleReference" />
+        <resource-file src="libs/OasisCSFaceClient.aar" target="libs/OasisCSFaceClient.aar" />
+    </platform>
+</plugin>

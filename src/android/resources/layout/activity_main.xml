@@ -1,0 +1,87 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:context="com.vasco.faceid.SampleActivity">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/vasco" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:background="#005696"
+            android:onClick="OnEnrollClicked"
+            android:text="Enrolamiento"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:background="#005696"
+            android:onClick="OnVerifyClicked"
+            android:text="Verificación"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <Switch
+            android:id="@+id/blink_eyes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:contextClickable="false"
+            android:text="Blink eyes"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:thumb="@drawable/switch_thumb" />
+
+        <Switch
+            android:id="@+id/move_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Move head"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:thumb="@drawable/switch_thumb" />
+
+        <TextView
+            android:id="@+id/text_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:textSize="20sp"
+            tools:context=".SampleActivity" />
+
+    </LinearLayout>
+</ScrollView>

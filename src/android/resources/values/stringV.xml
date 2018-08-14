@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="btn_enroll">Enroll</string>
+    <string name="btn_verify">Verify</string>
+    <string name="switch_blink_eyes">Blink eyes</string>
+    <string name="switch_move_head">Move head</string>
+</resources>

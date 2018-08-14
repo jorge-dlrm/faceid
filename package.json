@@ -1,0 +1,17 @@
+{
+  "name": "com.vasco.faceid",
+  "version": "0.0.1",
+  "description": "Plugin para el FaceID",
+  "cordova": {
+    "id": "com.vasco.faceid",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Jorge de los Rios",
+  "license": "ISC"
+}
