@@ -122,7 +122,8 @@ public class FaceID extends CordovaPlugin {
                 if (isEnrollment)
                 {
                     // Enrollment
-                    respuesta.put("Status", "Face Enrolled with success");
+                    respuesta.put("Status", "OK");
+                    respuesta.put("Message", "Face Enrolled with success");
                     double quality = data.getDoubleExtra(Constants.EXTRA_QUALITY, -1);
                     respuesta.put("Quality", quality);
                 }
@@ -131,11 +132,13 @@ public class FaceID extends CordovaPlugin {
                     double score = data.getDoubleExtra(Constants.EXTRA_SCORE, -1);
                     if (score > 0)
                     {
-                        respuesta.put("Status", "Face Enrolled with success");
+                        respuesta.put("Status", "OK");
+                        respuesta.put("Message", "Face Recognized with success");
                     }
                     else
                     {
-                        respuesta.put("Status", "Face NOT Recognized");
+                        respuesta.put("Status", "Error");
+                        respuesta.put("Message", "Face NOT Recognized");
                     }
                     respuesta.put("Score", score);
                     boolean spoofingDetected = data.getBooleanExtra(Constants.EXTRA_SPOOFING_DETECTED, false);
@@ -155,7 +158,8 @@ public class FaceID extends CordovaPlugin {
                     // Scanning has been cancelled
                     resultText = isEnrollment ? "Enrollment" : "Recognition";
                     resultText += " cancelled.";
-                    respuesta.put("Error", resultText);
+                    respuesta.put("Status", "Error");
+                    respuesta.put("Message", resultText);
                     PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                     resultado.setKeepCallback(true);
                     PUBLIC_CALLBACKS.sendPluginResult(resultado);
@@ -167,7 +171,8 @@ public class FaceID extends CordovaPlugin {
                     if (retCode == -3)
                     {
                         double score = data.getDoubleExtra(Constants.EXTRA_SCORE, -1);
-                        respuesta.put("Error", message);
+                        respuesta.put("Status", "Error");
+                        respuesta.put("Message", message);
                         respuesta.put("Score", score);
                         PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                         resultado.setKeepCallback(true);
@@ -176,7 +181,8 @@ public class FaceID extends CordovaPlugin {
                     else
                     {
                         resultText = "Error during face " + requestType + ": (" + retCode + ") " + message;
-                        respuesta.put("Error", resultText);
+                        respuesta.put("Status", "Error");
+                        respuesta.put("Message", resultText);
                         PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
