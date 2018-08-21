@@ -41,7 +41,6 @@ public class FaceID extends CordovaPlugin {
         Context context = cordova.getActivity().getApplicationContext();
         PUBLIC_CALLBACKS = callbackContext;
         if(action.equals("enrolamiento")) {
-            JSONObject respuesta = new JSONObject();
             JSONObject obj = args.optJSONObject(0);
             if (obj != null) {
               cedula = obj.optString("cedula");
@@ -118,7 +117,7 @@ public class FaceID extends CordovaPlugin {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        
+        JSONObject respuesta = new JSONObject();
         String requestType = (data == null) ? "" : data.getStringExtra(Constants.EXTRA_REQUEST_TYPE);
         String resultText = "";
 
@@ -128,10 +127,10 @@ public class FaceID extends CordovaPlugin {
                 if (isEnrollment)
                 {
                     // Enrollment
-                    resultText = "Face Enrolled with success.";
+                    respuesta.put("Status", "Face Enrolled with success");
                     double quality = data.getDoubleExtra(Constants.EXTRA_QUALITY, -1);
-                    resultText += "\n- Quality: " + quality;
-                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                    respuesta.put("Quality", quality);
+                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                     resultado.setKeepCallback(true);
                     PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
@@ -140,30 +139,29 @@ public class FaceID extends CordovaPlugin {
                     double score = data.getDoubleExtra(Constants.EXTRA_SCORE, -1);
                     if (score > 0)
                     {
-                        resultText = "Face Recognized with success.";
-                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                        respuesta.put("Status", "Face Enrolled with success");
+                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
                     else
                     {
-                        resultText = "Face NOT Recognized.";
-                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                        respuesta.put("Status", "Face NOT Recognized");
+                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
-                    resultText += "\n- Score: " + score;
-
+                    respuesta.put("Score", score);
                     boolean spoofingDetected = data.getBooleanExtra(Constants.EXTRA_SPOOFING_DETECTED, false);
-                    resultText += "\n- Spoofing detected: " + spoofingDetected;
-                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                    respuesta.put("Spoofing", spoofingDetected);
+                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                     resultado.setKeepCallback(true);
                     PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
 
                 String name = data.getStringExtra(Constants.EXTRA_NAME);
-                resultText += "\n- Name: " + name;
-                PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                respuesta.put("Name", name);
+                PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                 resultado.setKeepCallback(true);
                 PUBLIC_CALLBACKS.sendPluginResult(resultado);
             }
@@ -174,7 +172,8 @@ public class FaceID extends CordovaPlugin {
                     // Scanning has been cancelled
                     resultText = isEnrollment ? "Enrollment" : "Recognition";
                     resultText += " cancelled.";
-                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                    respuesta.put("Error", resultText);
+                    PluginResult resultado = new PluginResult(PluginResult.Status.Error, respuesta);
                     resultado.setKeepCallback(true);
                     PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
@@ -185,16 +184,17 @@ public class FaceID extends CordovaPlugin {
                     if (retCode == -3)
                     {
                         double score = data.getDoubleExtra(Constants.EXTRA_SCORE, -1);
-                        resultText = message;
-                        resultText += "\n- Score: " + score;
-                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                        respuesta.put("Error", message);
+                        respuesta.put("Score", score);
+                        PluginResult resultado = new PluginResult(PluginResult.Status.Error, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
                     else
                     {
                         resultText = "Error during face " + requestType + ": (" + retCode + ") " + message;
-                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, resultText);
+                        respuesta.put("Error", resultText);
+                        PluginResult resultado = new PluginResult(PluginResult.Status.Error, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
