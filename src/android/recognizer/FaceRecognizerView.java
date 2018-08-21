@@ -231,13 +231,13 @@ public class FaceRecognizerView extends RelativeLayout
         GradientDrawable backgroundDrawable = (GradientDrawable) progressBarDrawable
                 .findDrawableByLayerId(android.R.id.background);
         backgroundDrawable.setCornerRadius(0);
-        backgroundDrawable.setColor(Color.parseColor("#33005394"));
+        backgroundDrawable.setColor(Color.parseColor("#005394"));
         progressBarDrawable.setDrawableByLayerId(android.R.id.background, backgroundDrawable);
 
         // Create a new clipDrawable (used for progress bar)
         // and add it a gradient drawable to draw the progress.
         GradientDrawable customGradientDrawable = new GradientDrawable();
-        customGradientDrawable.setColor(Color.parseColor("#005394"));
+        customGradientDrawable.setColor(Color.parseColor("#1ADBD0"));
         customGradientDrawable.setCornerRadius(0);
         ClipDrawable customClipDrawable = new ClipDrawable(customGradientDrawable, Gravity.START,
                 ClipDrawable.HORIZONTAL);
@@ -288,7 +288,7 @@ public class FaceRecognizerView extends RelativeLayout
     @Override
     public void onEyeBlinkChallengeStarted()
     {
-        String challengeMessage = "BLINK !";
+        String challengeMessage = "Parpadea !";
         recognitionCallbackView.updateActionMessage("", challengeMessage);
     }
 
@@ -313,12 +313,10 @@ public class FaceRecognizerView extends RelativeLayout
         switch (headMovementChallengeType)
         {
             case TURN_LEFT:
-                challengeMessage = "\u21da";
-                actionMessage = "Turn LEFT and straight again";
+                actionMessage = "Gira a la Izquierda";
                 break;
             case TURN_RIGHT:
-                challengeMessage = "\u21db";
-                actionMessage = "Turn RIGHT and straight again";
+                actionMessage = "Gira a la Derecha";
                 break;
         }
         recognitionCallbackView.updateActionMessage(actionMessage, challengeMessage);
@@ -395,63 +393,63 @@ public class FaceRecognizerView extends RelativeLayout
         // Check image quality issues and set Textview callback.
         if (issues.faceNotDetected)
         {
-            message = "No face detected";
+            message = "Cara no detectada";
         }
         else if (issues.faceTooClose)
         {
-            message = "Face too close";
+            message = "Cara demasiado cerca";
         }
         else if (issues.faceTooFar)
         {
-            message = "Face too far";
+            message = "Cara demasiado lejos";
         }
         else if (issues.faceNotCenteredTop)
         {
-            message = "Face too close to top";
+            message = "Cara muy arriba";
         }
         else if (issues.faceNotCenteredRight)
         {
-            message = "Face too close to right";
+            message = "Cara muy a la derecha";
         }
         else if (issues.faceNotCenteredBottom)
         {
-            message = "Face too close to bottom";
+            message = "Cara muy Abajo";
         }
         else if (issues.faceNotCenteredLeft)
         {
-            message = "Face too close to left";
+            message = "Cara muy a la izquierda";
         }
         else if (issues.facePitchAngleTooHigh)
         {
-            message = "Face pitch angle too high";
+            message = "Ángulo de la cara muy alto";
         }
         else if (issues.facePitchAngleTooLow)
         {
-            message = "Face pitch angle too low";
+            message = "Ángulo de la cara muy abajo";
         }
         else if (issues.faceYawAngleTooHigh)
         {
-            message = "Face yaw angle too high";
+            message = "Inclinación de la cara muy alta";
         }
         else if (issues.faceYawAngleTooLow)
         {
-            message = "Face yaw angle too low";
+            message = "Inclinación de la cara muy baja";
         }
         else if (issues.tooShaky)
         {
-            message = "Image too shaky";
+            message = "Imagen muy borrosa";
         }
         else if (issues.tooBright)
         {
-            message = "Image too bright";
+            message = "Imagen muy brillante";
         }
         else if (issues.tooDark)
         {
-            message = "Image too dark";
+            message = "Imagen muy oscura";
         }
         else if (issues.lightingNotUniform)
         {
-            message = "Lighting not uniform";
+            message = "La luz no es uniforme";
         }
 
         recognitionCallbackView.updateRecognitionCallback(issues);

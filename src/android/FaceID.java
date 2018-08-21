@@ -21,7 +21,6 @@ import com.vasco.faceid.constants.Constants;;
 
 public class FaceID extends CordovaPlugin {
 
-
     /**
      * Current action
      */
@@ -40,31 +39,30 @@ public class FaceID extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         Context context = cordova.getActivity().getApplicationContext();
         PUBLIC_CALLBACKS = callbackContext;
-        if(action.equals("enrolamiento")) {
+        if (action.equals("enrolamiento")) {
             JSONObject obj = args.optJSONObject(0);
             if (obj != null) {
-              cedula = obj.optString("cedula");
+                cedula = obj.optString("cedula");
             } else {
-              callbackContext.error("Falló el tema del args de la instancia");
-              return true;
+                callbackContext.error("Falló el tema del args de la instancia");
+                return true;
             }
             System.out.println("Entre 1");
             this.OnEnrollClicked();
-        }
-        else if(action.equals("verificacion")) {
+        } else if (action.equals("verificacion")) {
             JSONObject respuesta = new JSONObject();
             JSONObject obj = args.optJSONObject(0);
             if (obj != null) {
-              cedula = obj.optString("cedula");
+                cedula = obj.optString("cedula");
             } else {
-              callbackContext.error("Falló el tema del args de la instancia");
-              return true;
+                callbackContext.error("Falló el tema del args de la instancia");
+                return true;
             }
             System.out.println("Entre 1");
             this.OnVerifyClicked();
         }
 
-        PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT);
+        PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
         pluginResult.setKeepCallback(true); // Keep callback
         return true;
     }
@@ -74,8 +72,7 @@ public class FaceID extends CordovaPlugin {
      *
      * @param requestType Enrollment or Recognition
      */
-    private void startFaceRecognitionActivity(String requestType)
-    {
+    private void startFaceRecognitionActivity(String requestType) {
         // Instantiate intent to start face recognition activity
         Intent intent = new Intent("com.vasco.faceid.FaceRecognitionActivity");
 
@@ -91,19 +88,16 @@ public class FaceID extends CordovaPlugin {
      *
      * @param actionName Enroll or Recognize
      */
-    private void checkAndRunActivity(String actionName)
-    {
+    private void checkAndRunActivity(String actionName) {
         currentAction = actionName;
         startFaceRecognitionActivity(actionName);
     }
 
-    public void OnEnrollClicked()
-    {
+    public void OnEnrollClicked() {
         checkAndRunActivity(Constants.ACTION_ENROLLMENT);
     }
 
-    public void OnVerifyClicked()
-    {
+    public void OnVerifyClicked() {
         checkAndRunActivity(Constants.ACTION_RECOGNITION);
     }
 
@@ -115,9 +109,9 @@ public class FaceID extends CordovaPlugin {
      * @param data        Intent containing the data we want to print.
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)  {
         try {
+
             JSONObject respuesta = new JSONObject();
             String requestType = (data == null) ? "" : data.getStringExtra(Constants.EXTRA_REQUEST_TYPE);
             String resultText = "";
@@ -131,9 +125,6 @@ public class FaceID extends CordovaPlugin {
                     respuesta.put("Status", "Face Enrolled with success");
                     double quality = data.getDoubleExtra(Constants.EXTRA_QUALITY, -1);
                     respuesta.put("Quality", quality);
-                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
-                    resultado.setKeepCallback(true);
-                    PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
                 else
                 {
@@ -141,23 +132,14 @@ public class FaceID extends CordovaPlugin {
                     if (score > 0)
                     {
                         respuesta.put("Status", "Face Enrolled with success");
-                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
-                        resultado.setKeepCallback(true);
-                        PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
                     else
                     {
                         respuesta.put("Status", "Face NOT Recognized");
-                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
-                        resultado.setKeepCallback(true);
-                        PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
                     respuesta.put("Score", score);
                     boolean spoofingDetected = data.getBooleanExtra(Constants.EXTRA_SPOOFING_DETECTED, false);
                     respuesta.put("Spoofing", spoofingDetected);
-                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
-                    resultado.setKeepCallback(true);
-                    PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
                 
                 String name = data.getStringExtra(Constants.EXTRA_NAME);
@@ -204,8 +186,7 @@ public class FaceID extends CordovaPlugin {
             return;
         }
         catch(JSONException e) {
-            throw(e);
-        }
+            System.out.println("FaceID + Error with the JsonObject: " + e);
         }
     }
-    
+}

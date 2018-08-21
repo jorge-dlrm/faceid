@@ -124,7 +124,7 @@ public class FaceRecognizerOverlay extends View
         actionMessagePaint.setTextSize(screenWidth * 6 / 100);
         actionMessagePaint.setTextAlign(Paint.Align.CENTER);
 
-        actionMessage = isEnrollment ? "Please enroll" : "Please authenticate";
+        actionMessage = isEnrollment ? "Enrolamiento" : "Autenticación";
 
         // Initialize action message paint (better here than in onDraw)
         challengeMessagePaint = new Paint();
