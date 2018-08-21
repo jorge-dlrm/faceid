@@ -173,7 +173,7 @@ public class FaceID extends CordovaPlugin {
                     resultText = isEnrollment ? "Enrollment" : "Recognition";
                     resultText += " cancelled.";
                     respuesta.put("Error", resultText);
-                    PluginResult resultado = new PluginResult(PluginResult.Status.Error, respuesta);
+                    PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                     resultado.setKeepCallback(true);
                     PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
@@ -186,7 +186,7 @@ public class FaceID extends CordovaPlugin {
                         double score = data.getDoubleExtra(Constants.EXTRA_SCORE, -1);
                         respuesta.put("Error", message);
                         respuesta.put("Score", score);
-                        PluginResult resultado = new PluginResult(PluginResult.Status.Error, respuesta);
+                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
@@ -194,7 +194,7 @@ public class FaceID extends CordovaPlugin {
                     {
                         resultText = "Error during face " + requestType + ": (" + retCode + ") " + message;
                         respuesta.put("Error", resultText);
-                        PluginResult resultado = new PluginResult(PluginResult.Status.Error, respuesta);
+                        PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
                         resultado.setKeepCallback(true);
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
