@@ -117,13 +117,14 @@ public class FaceID extends CordovaPlugin {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        JSONObject respuesta = new JSONObject();
-        String requestType = (data == null) ? "" : data.getStringExtra(Constants.EXTRA_REQUEST_TYPE);
-        String resultText = "";
-
-        boolean isEnrollment = Constants.ACTION_ENROLLMENT.equals(requestType);
-
-        if(resultCode == cordova.getActivity().RESULT_OK){
+        try {
+            JSONObject respuesta = new JSONObject();
+            String requestType = (data == null) ? "" : data.getStringExtra(Constants.EXTRA_REQUEST_TYPE);
+            String resultText = "";
+            
+            boolean isEnrollment = Constants.ACTION_ENROLLMENT.equals(requestType);
+            
+            if(resultCode == cordova.getActivity().RESULT_OK){
                 if (isEnrollment)
                 {
                     // Enrollment
@@ -158,7 +159,7 @@ public class FaceID extends CordovaPlugin {
                     resultado.setKeepCallback(true);
                     PUBLIC_CALLBACKS.sendPluginResult(resultado);
                 }
-
+                
                 String name = data.getStringExtra(Constants.EXTRA_NAME);
                 respuesta.put("Name", name);
                 PluginResult resultado = new PluginResult(PluginResult.Status.OK, respuesta);
@@ -199,7 +200,12 @@ public class FaceID extends CordovaPlugin {
                         PUBLIC_CALLBACKS.sendPluginResult(resultado);
                     }
                 }
+            }
+            return;
         }
-        return;
+        catch(JSONException e) {
+            throw(e);
+        }
+        }
     }
-}
+    
