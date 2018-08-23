@@ -86,6 +86,7 @@ public class FaceRecognizerOverlay extends View
     {
         super(context);
 
+
         // Draw translucent rounded rect in center of the view.
         scanningZoneDrawable = new ShapeDrawable(
                 new RoundRectShape(new float[] { 35, 35, 35, 35, 35, 35, 35, 35 }, null, null));

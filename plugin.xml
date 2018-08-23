@@ -12,7 +12,8 @@
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity 
-                android:label="Face Recognition Activity" 
+                android:label=""
+                android:background="@color/fondo"
                 android:name="com.vasco.faceid.FaceRecognitionActivity">
                 <intent-filter>
                     <!-- We are going to use this name to start the activity later in Java -->

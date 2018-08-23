@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-
+import android.view.View;
 import com.vasco.faceid.constants.Constants;
 import com.vasco.faceid.recognizer.FaceRecognizer;
 import com.vasco.faceid.recognizer.FaceRecognizerView;
